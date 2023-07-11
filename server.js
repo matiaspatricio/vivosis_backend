@@ -1,0 +1,41 @@
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const fs = require("fs/promises");
+
+const { v4: uuid } = require("uuid");
+
+const clienteRouter = require("./routes/ClienteRoutes");
+const pedidoRouter = require("./routes/PedidoRoutes");
+const ingresoRouter = require("./routes/IngresoRoutes");
+const productoRouter = require("./routes/ProductoRoutes");
+const categoriaRouter = require("./routes/CategoriaRoutes");
+
+const app = express();
+
+// Configurar las opciones de CORS
+const corsOptions = {
+  origin: "http://192.168.0.10:3000", // Reemplaza con la URL correcta de tu frontend
+  credentials: true, // Permitir el intercambio de cookies y encabezados de autenticación
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Middleware
+app.use("/api/cliente", clienteRouter);
+app.use("/api/pedido", pedidoRouter);
+app.use("/api/ingreso", ingresoRouter);
+app.use("/api/producto", productoRouter);
+app.use("/api/categoria", categoriaRouter);
+
+// Configurar mongoose
+mongoose.connect("mongodb://127.0.0.1:27017/vivosis");
+
+app.listen(3001, () => {
+  console.log(`Server is running on port 3001`);
+});
+
+module.exports = app;

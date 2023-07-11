@@ -1,0 +1,12 @@
+# Ignorar archivos de configuración específicos de IDEs
+.vscode/
+.idea/
+
+# Ignorar archivos generados automáticamente
+node_modules/
+build/
+dist/
+
+# Ignorar archivos con información sensible
+credentials.json
+secrets.txt
