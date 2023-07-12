@@ -38,8 +38,9 @@ app.get("/", (req, res) => {
 });
 
 // Configurar mongoose
+/*
 mongoose.connect("mongodb://127.0.0.1:27017/vivosis");
-
+*/
 app.listen(port, () => {
   console.log(`Server is running on port 3001`);
 });
