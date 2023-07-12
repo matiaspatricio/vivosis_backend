@@ -18,12 +18,10 @@ const pedidoSchema = new Schema({
   costo: Number,  
   comentarios: String,
   estado_pedido: String,  
+  estado_pago: String,
   usuario: String,
   fecha_entrega: String,
-  localidad: String,
-  estado_pago: String,
-
-  
+  localidad: String    
   
 });
 
