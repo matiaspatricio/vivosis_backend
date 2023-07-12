@@ -31,6 +31,10 @@ app.use("/api/ingreso", ingresoRouter);
 app.use("/api/producto", productoRouter);
 app.use("/api/categoria", categoriaRouter);
 
+app.get("/", (req, res) => {
+  res.send("Inicio");
+});
+
 // Configurar mongoose
 mongoose.connect("mongodb://127.0.0.1:27017/vivosis");
 
