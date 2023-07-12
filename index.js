@@ -34,9 +34,7 @@ app.use("/api/ingreso", ingresoRouter);
 app.use("/api/producto", productoRouter);
 app.use("/api/categoria", categoriaRouter);
 
-app.get("/", (req, res) => {
-  res.send("Inicio");
-});
+
 
 
 //mongoose.connect(pw);
