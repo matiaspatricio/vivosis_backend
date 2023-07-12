@@ -9,7 +9,7 @@ const {
 
 const router = express.Router();
 
-router.route("/getAllClientes").get(getAllClientes);
+router.route("/getallclientes").get(getAllClientes);
 router.route("/:id").get(getClienteById).put(updateCliente).delete(deleteCliente);
 router.route("/").post(createCliente);
 

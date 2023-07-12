@@ -9,7 +9,7 @@ const {
 
 const router = express.Router();
 
-router.route("/getAllIngresos").get(getAllIngresos);
+router.route("/getallingresos").get(getAllIngresos);
 router.route("/:id").get(getIngresoById).put(updateIngreso).delete(deleteIngreso);
 router.route("/").post(createIngreso);
 

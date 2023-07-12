@@ -9,7 +9,7 @@ const {
 
 const router = express.Router();
 
-router.route("/getAllCategorias").get(getAllCategorias);
+router.route("/getallcategorias").get(getAllCategorias);
 router.route("/:id").get(getCategoriaById).put(updateCategoria).delete(deleteCategoria);
 router.route("/").post(createCategoria);
 
