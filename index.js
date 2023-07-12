@@ -18,7 +18,7 @@ const app = express();
 
 // Configurar las opciones de CORS
 const corsOptions = {
-  origin: "http://192.168.0.10:3000", // Reemplaza con la URL correcta de tu frontend
+  origin: "http://localhost:3000", // Reemplaza con la URL correcta de tu frontend
   credentials: true, // Permitir el intercambio de cookies y encabezados de autenticación
   optionSuccessStatus: 200,
 };
@@ -39,13 +39,13 @@ app.get("/", (req, res) => {
 });
 
 
-mongoose.connect(pw);
+//mongoose.connect(pw);
 // Configurar mongoose
-/*
+
 mongoose.connect("mongodb://127.0.0.1:27017/vivosis");
-*/
+
 app.listen(port, () => {
-  console.log(`Server is running on port 3001`);
+  console.log(`Server is running on port: ${port}`);
 });
 
 module.exports = app;
