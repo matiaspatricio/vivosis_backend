@@ -18,7 +18,7 @@ const app = express();
 
 // Configurar las opciones de CORS
 const corsOptions = {
-  origin: "http://localhost:3000", // Reemplaza con la URL correcta de tu frontend
+  origin: "https://vivosis-frontend.vercel.app", // Reemplaza con la URL correcta de tu frontend
   credentials: true, // Permitir el intercambio de cookies y encabezados de autenticación
   optionSuccessStatus: 200,
 };
