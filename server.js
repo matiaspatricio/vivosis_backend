@@ -11,6 +11,8 @@ const ingresoRouter = require("./routes/IngresoRoutes");
 const productoRouter = require("./routes/ProductoRoutes");
 const categoriaRouter = require("./routes/CategoriaRoutes");
 
+const port = process.env.PORT || 3001;
+
 const app = express();
 
 // Configurar las opciones de CORS
@@ -38,7 +40,7 @@ app.get("/", (req, res) => {
 // Configurar mongoose
 mongoose.connect("mongodb://127.0.0.1:27017/vivosis");
 
-app.listen(3001, () => {
+app.listen(port, () => {
   console.log(`Server is running on port 3001`);
 });
 
