@@ -12,7 +12,8 @@ const productoRouter = require("./routes/ProductoRoutes");
 const categoriaRouter = require("./routes/CategoriaRoutes");
 
 const port = process.env.PORT || 3001;
-
+const pw = "mongodb+srv://matiasnrpatricio:WNgzaMPh3512oiCf@cluster0.ukh6b1r.mongodb.net/vivosis";
+//const pw = "mongodb+srv://matiasnrpatricio:WNgzaMPh3512oiCf@cluster0.ukh6b1r.mongodb.net/?retryWrites=true&w=majority/vivosis";
 const app = express();
 
 // Configurar las opciones de CORS
@@ -37,6 +38,8 @@ app.get("/", (req, res) => {
   res.send("Inicio");
 });
 
+
+mongoose.connect(pw);
 // Configurar mongoose
 /*
 mongoose.connect("mongodb://127.0.0.1:27017/vivosis");
