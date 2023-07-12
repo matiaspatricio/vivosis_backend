@@ -37,10 +37,10 @@ app.use("/api/categoria", categoriaRouter);
 
 
 
-//mongoose.connect(pw);
+mongoose.connect(pw);
 // Configurar mongoose
 
-mongoose.connect("mongodb://127.0.0.1:27017/vivosis");
+//mongoose.connect("mongodb://127.0.0.1:27017/vivosis");
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
