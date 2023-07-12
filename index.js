@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const fs = require("fs/promises");
 
-const { v4: uuid } = require("uuid");
+//const { v4: uuid } = require("uuid");
 
 const clienteRouter = require("./routes/ClienteRoutes");
 const pedidoRouter = require("./routes/PedidoRoutes");
