@@ -21,5 +21,5 @@ exports.deleteCliente = async (id) => {
   return await ClienteModel.findByIdAndDelete(id);
 
 
-// Faltaria un servicio para obtener  por otro criterio ej localidad , nombre
+
 };
