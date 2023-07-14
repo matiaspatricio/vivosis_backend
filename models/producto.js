@@ -8,7 +8,9 @@ const productoSchema = new Schema({
   },*/
   id: String,
   nombre: String,
+  id_categoria: String,
   categoria: String,
+  id_subcategoria: String,
   subcategoria: String,
   precio: Number,  
   costo: Number,
