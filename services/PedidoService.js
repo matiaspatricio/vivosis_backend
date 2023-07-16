@@ -1,13 +1,13 @@
 const PedidoModel = require("../models/pedido");
 
 exports.getAllPedidos = async () => {
-  return await PedidoModel.find().sort({ fecha: -1 });
+  return await PedidoModel.find().sort({ _id: -1 });
 };
 
 exports.getPedidosPendientes = async () => {
   return await PedidoModel.find({
     estado_pedido: { $nin: ['FINALIZADO', 'CANCELADO'] }
-  }).sort({ fecha: -1 });
+  }).sort({ _id: -1 });
 };
 
 exports.createPedido = async (pedido) => {
