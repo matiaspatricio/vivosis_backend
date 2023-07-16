@@ -7,6 +7,7 @@ const {
   getPedidoByCliente,
   updatePedido,
   deletePedido,
+  getPedidosHoy,
   getPedidosAyer,
   getPedidosSemana,
   getPedidosMes
@@ -24,6 +25,7 @@ router.route('/getpedidobycliente/:id_cliente').get(getPedidoByCliente);
 router.route('/getpedidosayer').get(getPedidosAyer);
 router.route('/getpedidossemana').get(getPedidosSemana);
 router.route('/getpedidosmes').get(getPedidosMes);
+router.route('/getpedidoshoy').get(getPedidosHoy);
 
 
 router

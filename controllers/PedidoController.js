@@ -18,6 +18,16 @@ exports.getPedidosPendientes = async (req, res) => {
   }
 };
 
+exports.getPedidosHoy = async (req, res) => {
+  try {
+    const pedidos = await getPedidosHoy();
+    res.json(pedidos);
+  } catch (error) {
+    console.log('Error al obtener los pedidos de hoy:', error);
+    res.status(500).json({ error: 'Ocurrió un error al obtener los pedidos de hoy' });
+  }
+};
+
 exports.getPedidosAyer = async (req, res) => {
   try {
     const pedidosAyer = await PedidoService.getPedidosAyer();

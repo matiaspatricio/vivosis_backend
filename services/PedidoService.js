@@ -29,9 +29,18 @@ exports.updatePedido = async (id, pedido) => {
 
 exports.deletePedido = async (id) => {
   return await PedidoModel.findByIdAndDelete(id);
-
-
 };
+
+exports.getPedidosHoy = async () => {
+  const today = startOfToday();
+  const startOfToday = startOfDay(today);
+  const endOfToday = endOfDay(today);
+
+  return await PedidoModel.find({
+    fecha: { $gte: startOfToday, $lte: endOfToday }
+  });
+};
+
 exports.getPedidosAyer = async () => {
   const yesterday = subDays(new Date(), 1);
   const startOfYesterday = startOfDay(yesterday);
