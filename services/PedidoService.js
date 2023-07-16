@@ -1,5 +1,5 @@
 const PedidoModel = require("../models/pedido");
-const { startOfDay, endOfDay, subDays,  startOfWeek, endOfWeek } = require('date-fns');
+const { startOfDay, endOfDay, subDays,  startOfWeek, endOfWeek, startOfToday  } = require('date-fns');
 
 exports.getAllPedidos = async () => {
   return await PedidoModel.find().sort({ _id: -1 });
