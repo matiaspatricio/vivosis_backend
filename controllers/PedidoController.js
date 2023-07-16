@@ -20,7 +20,7 @@ exports.getPedidosPendientes = async (req, res) => {
 
 exports.getPedidosHoy = async (req, res) => {
   try {
-    const pedidos = await getPedidosHoy();
+    const pedidos = await PedidoService.getPedidosHoy();
     res.json(pedidos);
   } catch (error) {
     console.log('Error al obtener los pedidos de hoy:', error);
