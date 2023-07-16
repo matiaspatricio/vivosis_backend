@@ -1,7 +1,7 @@
 const PedidoModel = require("../models/pedido");
 
 exports.getAllPedidos = async () => {
-  return await PedidoModel.find().sort({ fecha: 1 });
+  return await PedidoModel.find().sort({ fecha: -1 });
 };
 
 exports.getPedidosPendientes = async () => {
