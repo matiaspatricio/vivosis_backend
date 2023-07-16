@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const pedidoSchema = new Schema({
-  _id: {
+  /*_id: {
     type: mongoose.Types.ObjectId,
     required: false
-  },
+  },*/
   fecha: Date,
   id_cliente: String,
   nombre_cliente: String,
