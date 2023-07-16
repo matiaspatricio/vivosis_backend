@@ -1,17 +1,8 @@
 const PedidoModel = require("../models/pedido");
-exports.getAllPedidos = async () => {
-  return await PedidoModel.aggregate([
-    {
-      $addFields: {
-        fecha: { $toDate: "$fecha" }
-      }
-    },
-    {
-      $sort: { fecha: -1 }
-    }
-  ]);
-};
 
+exports.getAllPedidos = async () => {
+  return await PedidoModel.find().sort({ fecha: -1 });
+};
 
 exports.getPedidosPendientes = async () => {
   return await PedidoModel.find({
