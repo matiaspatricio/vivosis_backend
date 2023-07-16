@@ -7,7 +7,7 @@ const pedidoSchema = new Schema({
     required: false
   },*/
   id: String,
-  fecha: String,
+  fecha: Date,
   id_cliente: String,
   nombre_cliente: String,
   id_articulo: String,
