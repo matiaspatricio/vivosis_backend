@@ -7,8 +7,13 @@ const {
   getPedidoByCliente,
   updatePedido,
   deletePedido,
+  getPedidosAyer,
+  getPedidosSemana,
+  getPedidosMes
 } = require('../controllers/PedidoController');
+
 const authenticateToken = require('../middlewares/authMiddleware');
+
 
 const router = express.Router();
 
@@ -16,11 +21,17 @@ const router = express.Router();
 router.route('/getallpedidos').get( getAllPedidos);
 router.route('/getpedidospendientes').get( getPedidosPendientes);
 router.route('/getpedidobycliente/:id_cliente').get(getPedidoByCliente);
+router.route('/getpedidosayer').get(getPedidosAyer);
+router.route('/getpedidossemana').get(getPedidosSemana);
+router.route('/getpedidosmes').get(getPedidosMes);
+
+
 router
   .route('/:id')
   .get( getPedidoById)
   .put( updatePedido)
   .delete( deletePedido);
 router.route('/').post( createPedido);
+
 
 module.exports = router;

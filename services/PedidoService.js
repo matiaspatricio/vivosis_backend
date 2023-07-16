@@ -1,4 +1,5 @@
 const PedidoModel = require("../models/pedido");
+const { startOfDay, endOfDay, subDays,  startOfWeek, endOfWeek } = require('date-fns');
 
 exports.getAllPedidos = async () => {
   return await PedidoModel.find().sort({ _id: -1 });
@@ -30,5 +31,28 @@ exports.deletePedido = async (id) => {
   return await PedidoModel.findByIdAndDelete(id);
 
 
-// Faltaria un servicio para obtener  por otro criterio ej localidad , nombre
+};
+exports.getPedidosAyer = async () => {
+  const yesterday = subDays(new Date(), 1);
+  const startOfYesterday = startOfDay(yesterday);
+  const endOfYesterday = endOfDay(yesterday);
+
+  return await PedidoModel.find({
+    fecha: { $gte: startOfYesterday, $lte: endOfYesterday }
+  });
+};
+
+exports.getPedidosSemana = async () => {
+  const today = new Date();
+  const startOfThisWeek = startOfWeek(today, { weekStartsOn: 1 }); // 1 represents Monday as the start of the week
+  const endOfThisWeek = endOfWeek(today, { weekStartsOn: 1 });
+
+  return await PedidoModel.find({
+    fecha: { $gte: startOfThisWeek, $lte: endOfThisWeek }
+  });
+};
+exports.getPedidosMes = async (startOfMonth, endOfMonth) => {
+  return await PedidoModel.find({
+    fecha: { $gte: startOfMonth, $lte: endOfMonth }
+  });
 };

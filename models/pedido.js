@@ -2,12 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const pedidoSchema = new Schema({
-  /*_id: {
+  _id: {
     type: mongoose.Types.ObjectId,
     required: false
-  },*/
-  id: String,
-  fecha: String,
+  },
+  fecha: Date,
   id_cliente: String,
   nombre_cliente: String,
   id_articulo: String,
@@ -20,10 +19,8 @@ const pedidoSchema = new Schema({
   estado_pedido: String,  
   estado_pago: String,
   usuario: String,
-  fecha_entrega: String,
+  fecha_entrega: Date,
   localidad: String    
-  
 });
 
 module.exports = mongoose.model("Pedido", pedidoSchema);
-

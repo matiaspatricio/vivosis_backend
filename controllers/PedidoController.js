@@ -1,5 +1,15 @@
 const PedidoService = require("../services/PedidoService");
 
+exports.getPedidosAyer = async (req, res) => {
+  try {
+    const pedidosAyer = await PedidoService.getPedidosAyer();
+    res.json(pedidosAyer);
+  } catch (error) {
+    console.log("Error al obtener los pedidos de ayer:", error);
+    res.status(500).json({ error: "Ocurrió un error al obtener los pedidos de ayer" });
+  }
+};
+
 exports.getAllPedidos = async (req, res) => {
   try {
     const pedidos = await PedidoService.getAllPedidos();
@@ -17,7 +27,28 @@ exports.getPedidosPendientes = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+exports.getPedidosSemana = async (req, res) => {
+  try {
+    const pedidosSemana = await PedidoService.getPedidosSemana();
+    res.json(pedidosSemana);
+  } catch (error) {
+    console.log("Error al obtener los pedidos de la semana:", error);
+    res.status(500).json({ error: "Ocurrió un error al obtener los pedidos de la semana" });
+  }
+};
+exports.getPedidosMes = async (req, res) => {
+  try {
+    const currentDate = new Date();
+    const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    const endOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59, 999);
 
+    const pedidosMes = await PedidoService.getPedidosMes(startOfMonth, endOfMonth);
+    res.json(pedidosMes);
+  } catch (error) {
+    console.log("Error al obtener los pedidos del mes:", error);
+    res.status(500).json({ error: "Ocurrió un error al obtener los pedidos del mes" });
+  }
+};
 exports.createPedido = async (req, res) => {
   try {
     const pedido = await PedidoService.createPedido(req.body);
