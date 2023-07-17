@@ -38,6 +38,11 @@ exports.getPedidosHoy = async () => {
   const today = zonedTimeToUtc(startOfToday(), timeZone);
   const startOfTodayDate = startOfDay(today);
   const endOfToday = endOfDay(today);
+
+  console.log('today', today);
+  console.log('startOfTodayDate', startOfTodayDate);
+  console.log('endOfToday', endOfToday);
+
   
   
   return await PedidoModel.find({
