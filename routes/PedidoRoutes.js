@@ -10,6 +10,7 @@ const {
   getPedidosHoy,
   getPedidosAyer,
   getPedidosSemana,
+  getPedidosSemanaAnterior,
   getPedidosMes
 } = require('../controllers/PedidoController');
 
@@ -24,6 +25,7 @@ router.route('/getpedidospendientes').get( getPedidosPendientes);
 router.route('/getpedidobycliente/:id_cliente').get(getPedidoByCliente);
 router.route('/getpedidosayer').get(getPedidosAyer);
 router.route('/getpedidossemana').get(getPedidosSemana);
+router.route('/getpedidossemanaanterior').get(getPedidosSemanaAnterior);
 router.route('/getpedidosmes').get(getPedidosMes);
 router.route('/getpedidoshoy').get(getPedidosHoy);
 

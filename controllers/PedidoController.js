@@ -47,6 +47,16 @@ exports.getPedidosSemana = async (req, res) => {
     res.status(500).json({ error: "Ocurrió un error al obtener los pedidos de la semana" });
   }
 };
+exports.getPedidosSemanaAnterior = async (req, res) => {
+  try {
+    const pedidos = await PedidoService.getPedidosSemanaAnterior();
+    res.status(200).json(pedidos);
+  } catch (error) {
+    console.error('Error al obtener los pedidos de la semana anterior:', error);
+    res.status(500).json({ error: 'Ocurrió un error al obtener los pedidos de la semana anterior' });
+  }
+};
+
 exports.getPedidosMes = async (req, res) => {
   try {
     const currentDate = new Date();
