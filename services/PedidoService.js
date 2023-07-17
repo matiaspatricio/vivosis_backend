@@ -37,8 +37,8 @@ exports.deletePedido = async (id) => {
 exports.getPedidosHoy = async () => {
   const timeZone = 'America/Argentina/Buenos_Aires';
   const today = utcToZonedTime(new Date(), timeZone);
-  const startOfTodayDate = startOfDay(today);
-  const endOfToday = endOfDay(today);
+  const startOfTodayDate = zonedTimeToUtc(startOfDay(today), timeZone);
+  const endOfToday = zonedTimeToUtc(endOfDay(today), timeZone);
 
   console.log('today', today);
   console.log('startOfTodayDate', startOfTodayDate);
@@ -48,6 +48,8 @@ exports.getPedidosHoy = async () => {
     fecha: { $gte: startOfTodayDate, $lte: endOfToday }
   });
 };
+
+
 
 exports.getPedidosAyer = async () => {
   const yesterday = subDays(new Date(), 1);
