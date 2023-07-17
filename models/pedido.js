@@ -6,7 +6,10 @@ const pedidoSchema = new Schema({
     type: mongoose.Types.ObjectId,
     required: false
   },*/
-  fecha: Date,
+  fecha: {
+    type: Date,
+    storeDatesAsUTC: false,
+  },
   id_cliente: String,
   nombre_cliente: String,
   id_articulo: String,
