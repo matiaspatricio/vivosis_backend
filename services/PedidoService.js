@@ -40,26 +40,26 @@ exports.getPedidosHoy = async () => {
   const startOfTodayDate = zonedTimeToUtc(startOfDay(today), timeZone);
   const endOfToday = zonedTimeToUtc(endOfDay(today), timeZone);
 
-  console.log('today', today);
-  console.log('startOfTodayDate', startOfTodayDate);
-  console.log('endOfToday', endOfToday);
-
   return await PedidoModel.find({
     fecha: { $gte: startOfTodayDate, $lte: endOfToday }
   });
 };
 
-
-
 exports.getPedidosAyer = async () => {
-  const yesterday = subDays(new Date(), 1);
-  const startOfYesterday = startOfDay(yesterday);
-  const endOfYesterday = endOfDay(yesterday);
+  const timeZone = 'America/Argentina/Buenos_Aires';
+  const yesterday = utcToZonedTime(subDays(new Date(), 1), timeZone);
+  const startOfYesterday = zonedTimeToUtc(startOfDay(yesterday), timeZone);            
+  const endOfYesterday = zonedTimeToUtc(endOfDay(yesterday), timeZone);
+
+  console.log('yesterday', yesterday);
+  console.log('startOfYesterday', startOfYesterday);
+  console.log('endOfYesterday', endOfYesterday);
 
   return await PedidoModel.find({
     fecha: { $gte: startOfYesterday, $lte: endOfYesterday }
   });
 };
+
 
 exports.getPedidosSemana = async () => {
   const today = new Date();
