@@ -1,6 +1,8 @@
 const PedidoModel = require("../models/pedido");
+const { zonedTimeToUtc, utcToZonedTime } = require('date-fns-tz');
 const { startOfDay, endOfDay, subDays, startOfWeek, endOfWeek, startOfToday } = require('date-fns');
-const { zonedTimeToUtc } = require('date-fns-tz');
+
+
 
 exports.getAllPedidos = async () => {
   return await PedidoModel.find().sort({ _id: -1 });
@@ -31,12 +33,12 @@ exports.updatePedido = async (id, pedido) => {
 exports.deletePedido = async (id) => {
   return await PedidoModel.findByIdAndDelete(id);
 };
+
 exports.getPedidosHoy = async () => {
-  // Obtener la fecha actual en la zona horaria 'America/Argentina/Buenos_Aires'
   const timeZone = 'America/Argentina/Buenos_Aires';
-  const today = zonedTimeToUtc(startOfToday(), timeZone);
-  const startOfTodayDate = zonedTimeToUtc(startOfDay(today), timeZone);
-  const endOfToday = zonedTimeToUtc(endOfDay(today), timeZone);
+  const today = utcToZonedTime(new Date(), timeZone);
+  const startOfTodayDate = startOfDay(today);
+  const endOfToday = endOfDay(today);
 
   console.log('today', today);
   console.log('startOfTodayDate', startOfTodayDate);
@@ -46,7 +48,6 @@ exports.getPedidosHoy = async () => {
     fecha: { $gte: startOfTodayDate, $lte: endOfToday }
   });
 };
-
 
 exports.getPedidosAyer = async () => {
   const yesterday = subDays(new Date(), 1);
