@@ -36,9 +36,10 @@ exports.getPedidosHoy = async () => {
   // Obtener la fecha actual en la zona horaria 'America/Argentina/Buenos_Aires'
   const timeZone = 'America/Argentina/Buenos_Aires';
   const today = zonedTimeToUtc(startOfToday(), timeZone);
-  const startOfTodayDate = zonedTimeToUtc(startOfDay(today), timeZone);
-  const endOfToday = zonedTimeToUtc(endOfDay(today), timeZone);
-
+  const startOfTodayDate = startOfDay(today);
+  const endOfToday = endOfDay(today);
+  
+  
   return await PedidoModel.find({
     fecha: { $gte: startOfTodayDate, $lte: endOfToday }
   });
