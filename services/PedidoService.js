@@ -1,7 +1,6 @@
 const PedidoModel = require("../models/pedido");
 const { startOfDay, endOfDay, subDays, startOfWeek, endOfWeek, startOfToday } = require('date-fns');
-const { utcToZonedTime } = require('date-fns-tz');
-
+const { zonedTimeToUtc } = require('date-fns-tz');
 
 exports.getAllPedidos = async () => {
   return await PedidoModel.find().sort({ _id: -1 });
