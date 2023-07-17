@@ -56,11 +56,13 @@ exports.getPedidosAyer = async () => {
 
 
 exports.getPedidosSemana = async () => {
-  const lastWeek = zonedTimeToUtc(new Date());
-  const startOfThisWeek = zonedTimeToUtc(startOfWeek(lastWeek, { weekStartsOn: 1 })); // 1 represents Monday as the start of the week
-  const endOfThisWeek = zonedTimeToUtc(endOfWeek(lastWeek, { weekStartsOn: 1 }));
+  
+  const today = zonedTimeToUtc(startOfToday(), timeZone);
+  const startOfThisWeek = startOfWeek(today, { weekStartsOn: 1 }); // 1 represents Monday as the start of the week
+  const endOfThisWeek = endOfWeek(today, { weekStartsOn: 1 });
 
-  /*console.log("lastWeek", lastWeek);
+  /*
+  console.log("Pedidos SemanalastWeek", today);
   console.log("startOfThisWeek", startOfThisWeek);
   console.log("endOfThisWeek", endOfThisWeek);*/
 
@@ -69,21 +71,16 @@ exports.getPedidosSemana = async () => {
   });
 };
 
-exports.getPedidosMes = async (startOfMonth, endOfMonth) => {
-  return await PedidoModel.find({
-    fecha: { $gte: startOfMonth, $lte: endOfMonth }
-  });
-};
-
-exports.getPedidosSemanaAnterior = async () => {
-  const today = zonedTimeToUtc(new Date());
-  const startOfLastWeek = zonedTimeToUtc(startOfWeek(today, { weekStartsOn: 1 })); // 1 represents Monday as the start of the week
-  const endOfLastWeek = zonedTimeToUtc(endOfWeek(today, { weekStartsOn: 1 }));
+exports.getPedidosSemanaAnterior = async () => {  
+  const today = zonedTimeToUtc(startOfToday(), timeZone);
+  const startOfLastWeek = startOfWeek(subDays(today, 7), { weekStartsOn: 1 }); // Substract 7 days to get the start of the previous week
+  const endOfLastWeek = endOfWeek(subDays(today, 7), { weekStartsOn: 1 });
 
   // Ajustar las fechas para que sean la última hora del día
-  const endOfLastWeekWithTime = zonedTimeToUtc(new Date(endOfLastWeek.getTime() + 86399999));
+  const endOfLastWeekWithTime = new Date(endOfLastWeek.getTime() + 86399999);
 
-  /*console.log("today", today);
+  /*
+  console.log("PedidosSemanaAnterior today", today);
   console.log("startOfLastWeek", startOfLastWeek);
   console.log("endOfLastWeek", endOfLastWeekWithTime);*/
 
@@ -91,3 +88,12 @@ exports.getPedidosSemanaAnterior = async () => {
     fecha: { $gte: startOfLastWeek, $lte: endOfLastWeekWithTime }
   });
 };
+
+
+exports.getPedidosMes = async (startOfMonth, endOfMonth) => {
+  return await PedidoModel.find({
+    fecha: { $gte: startOfMonth, $lte: endOfMonth }
+  });
+};
+
+
