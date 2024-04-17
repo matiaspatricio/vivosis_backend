@@ -5,7 +5,7 @@ const timeZone = 'America/Argentina/Buenos_Aires';
 
 
 exports.getAllPedidos = async () => {
-  return await PedidoModel.find().sort({ _id: -1 });
+  return await PedidoModel.find().sort({ fecha: -1 });
 };
 
 exports.getPedidosPendientes = async () => {

@@ -19,7 +19,4 @@ exports.updateCliente = async (id, cliente) => {
 
 exports.deleteCliente = async (id) => {
   return await ClienteModel.findByIdAndDelete(id);
-
-
-
 };

@@ -4,17 +4,7 @@ const ClienteModel = require("../models/cliente")
 exports.getAllClientes = async (req, res) => {
   try {
     const clientes = await ClienteService.getAllClientes();    
-    //res.set('X-Total-Count', totalClientes);
-    // res.setHeader("X-Total-Count", `${10}`);
-    // res.setHeader('Content-Range','clientes 20/20');
-    // res.setHeader('X-Content-Type-Options','nosniff');    
-    // res.setHeader('Access-Control-Expose-Headers', "X-Total-Count, Content-Range");
-    
-    //res.setHeader('Access-Control-Expose-Headers', "X-Total-Count");
-    
     res.json(clientes);
-    //res.json({ data: clientes}); 
-    //res.json({ data: clientes, status: "success" }); 
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
