@@ -13,7 +13,7 @@ exports.getPedidosPendientes = async () => {
     estado_pedido: { $nin: ['FINALIZADO', 'CANCELADO'] }
   })
   .sort({ _id: -1 }) // Ordena por ID en orden descendente para obtener los últimos primero
-  .limit(1000); // Limita la cantidad de resultados a 1000
+//  .limit(1000); // Limita la cantidad de resultados a 1000
 };
 
 
