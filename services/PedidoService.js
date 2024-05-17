@@ -5,7 +5,10 @@ const timeZone = 'America/Argentina/Buenos_Aires';
 
 
 exports.getAllPedidos = async () => {
-  return await PedidoModel.find().sort({ fecha: -1 });
+  return await PedidoModel.find({
+    estado_pedido: { $nin: ['PENDIENTE', 'CANCELADO'] }
+  }).sort({ fecha: -1 })
+  .limit(1000); // Limita la cantidad de resultados a 1000;
 };
 
 exports.getPedidosPendientes = async () => {
