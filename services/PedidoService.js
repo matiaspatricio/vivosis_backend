@@ -11,8 +11,11 @@ exports.getAllPedidos = async () => {
 exports.getPedidosPendientes = async () => {
   return await PedidoModel.find({
     estado_pedido: { $nin: ['FINALIZADO', 'CANCELADO'] }
-  }).sort({ _id: -1 });
+  })
+  .sort({ _id: -1 }) // Ordena por ID en orden descendente para obtener los últimos primero
+  .limit(1000); // Limita la cantidad de resultados a 1000
 };
+
 
 exports.createPedido = async (pedido) => {
   return await PedidoModel.create(pedido);
