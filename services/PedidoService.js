@@ -47,55 +47,40 @@ exports.updatePedido = async (id, pedido) => {
 exports.deletePedido = async (id) => {
   return await PedidoModel.findByIdAndDelete(id);
 };
-exports.getPedidosHoy = async () => {
-  const timeZone = "America/Argentina/Buenos_Aires"; // Asegúrate de definir la zona horaria correctamente
+exports.getPedidosHoy = async (res) => { // Si decides pasar `res` como argumento
+  const timeZone = "America/Argentina/Buenos_Aires";
   const today = utcToZonedTime(new Date(), timeZone);
   const startOfTodayDate = startOfDay(today);
   const endOfToday = endOfDay(today);
 
-  try{
-  // Consulta para obtener el total de hoy
-  const resultadoHoy = await PedidoModel.aggregate([
-    {
-      $match: {
-        fecha: { $gte: startOfTodayDate, $lte: endOfToday },
+  try {
+    const resultados = await PedidoModel.aggregate([
+      {
+        $match: {
+          fecha: { $gte: startOfTodayDate, $lte: endOfToday },
+        },
       },
-    },
-    {
-      $group: {
-        _id: null,
-        total: { $sum: "$total" },
+      {
+        $group: {
+          _id: null,
+          total: { $sum: "$total" },
+          QTotal: { $sum: 1 },
+        },
       },
-    },
-  ]);
+    ]);
 
-  // Consulta para obtener la cantidad de pedidos del dia
-  const resultadoDia = await PedidoModel.aggregate([
-    {
-      $match: {
-        fecha: { $gte: startOfTodayDate, $lte: endOfToday },
-      },
-    },
-    {
-      $group: {
-        _id: null,
-        QTotal: { $sum: 1 },
-      },
-    },
-  ]);
-  
+    const totalHoy = resultados.length > 0 ? resultados[0].total : 0;
+    const cantidadDia = resultados.length > 0 ? resultados[0].QTotal : 0;
 
-
-  // Preparar el objeto de respuesta
-  const totalHoy = resultadoHoy.length > 0 ? resultadoHoy[0].total : 0;
-  const cantidadDia = resultadoDia.length > 0 ? resultadoDia[0].QTotal : 0;
-
-  return { totalHoy, cantidadDia };
-}catch(error){
-  console.log("Error al obtener los pedidos del día:", error);
-  res.status(500).json({ error: "Ocurrió un error al obtener los pedidos del día" });
-}
-
+    return { totalHoy, cantidadDia };
+  } catch (error) {
+    console.error("Error al obtener los pedidos del día:", error);
+    if (res) { // Si `res` está disponible
+      res.status(500).json({ error: "Ocurrió un error al obtener los pedidos del día" });
+    } else {
+      throw error; // Lanza el error para manejarlo en otro lugar
+    }
+  }
 };
 exports.getPedidosAyer = async () => {
   const timeZone = "America/Argentina/Buenos_Aires"; // Asegúrate de definir la zona horaria correctamente
@@ -216,7 +201,6 @@ exports.getPedidosMesAnterior = async () => {
   const today = zonedTimeToUtc(startOfToday(), timeZone);
   const startOfLastMonth = subMonths(startOfMonth(today), 1);
   const endOfLastMonth = endOfDay(subMonths(endOfMonth(today), 1));
-  
 
   const resultado = await PedidoModel.aggregate([
     {
