@@ -11,7 +11,8 @@ const {
   getPedidosAyer,
   getPedidosSemana,
   getPedidosSemanaAnterior,
-  getPedidosMes
+  getPedidosMes,
+  getTotalesDashboard
 } = require('../controllers/PedidoController');
 
 const authenticateToken = require('../middlewares/authMiddleware');
@@ -28,6 +29,7 @@ router.route('/getpedidossemana').get(getPedidosSemana);
 router.route('/getpedidossemanaanterior').get(getPedidosSemanaAnterior);
 router.route('/getpedidosmes').get(getPedidosMes);
 router.route('/getpedidoshoy').get(getPedidosHoy);
+router.route('/gettotalesdashboard').get(getTotalesDashboard);
 
 
 router
