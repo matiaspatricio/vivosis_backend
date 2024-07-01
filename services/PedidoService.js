@@ -53,6 +53,7 @@ exports.getPedidosHoy = async () => {
   const startOfTodayDate = startOfDay(today);
   const endOfToday = endOfDay(today);
 
+  try{
   // Consulta para obtener el total de hoy
   const resultadoHoy = await PedidoModel.aggregate([
     {
@@ -82,12 +83,19 @@ exports.getPedidosHoy = async () => {
       },
     },
   ]);
+  
+
 
   // Preparar el objeto de respuesta
   const totalHoy = resultadoHoy.length > 0 ? resultadoHoy[0].total : 0;
   const cantidadDia = resultadoDia.length > 0 ? resultadoDia[0].QTotal : 0;
 
   return { totalHoy, cantidadDia };
+}catch(error){
+  console.log("Error al obtener los pedidos del día:", error);
+  res.status(500).json({ error: "Ocurrió un error al obtener los pedidos del día" });
+}
+
 };
 exports.getPedidosAyer = async () => {
   const timeZone = "America/Argentina/Buenos_Aires"; // Asegúrate de definir la zona horaria correctamente
