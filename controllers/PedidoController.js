@@ -137,9 +137,7 @@ exports.getTotalesDashboard = async (req, res) => {
     const pedidosSemanaAnterior = await PedidoService.getPedidosSemanaAnterior();
     const pedidosMes = await PedidoService.getPedidosMes();
     const pedidosMesAnterior = await PedidoService.getPedidosMesAnterior();
-
-    console.log('Totales para el dashboard:', pedidosHoy, pedidosAyer, pedidosSemana, pedidosSemanaAnterior, pedidosMes, pedidosMesAnterior)
-
+    
     // Construcción del objeto de respuesta
     const totalesDashboard = {
       pedidosHoy: pedidosHoy, // Asegúrate de que estos métodos devuelvan un objeto con una propiedad 'total'
@@ -148,8 +146,7 @@ exports.getTotalesDashboard = async (req, res) => {
       pedidosSemanaAnterior: pedidosSemanaAnterior,
       pedidosMes: pedidosMes,
       pedidosMesAnterior: pedidosMesAnterior
-    };
-    console.log('Totales para el dashboard:', totalesDashboard);
+    };    
 
     // Envío del objeto de respuesta
     res.json(totalesDashboard);

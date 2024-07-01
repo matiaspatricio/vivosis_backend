@@ -208,7 +208,7 @@ exports.getPedidosMesAnterior = async () => {
   const today = zonedTimeToUtc(startOfToday(), timeZone);
   const startOfLastMonth = subMonths(startOfMonth(today), 1);
   const endOfLastMonth = endOfDay(subMonths(endOfMonth(today), 1));
-  console.log("Criterio de búsqueda", startOfLastMonth, endOfLastMonth);
+  
 
   const resultado = await PedidoModel.aggregate([
     {
